@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suhoor Festival — proposed visual direction</title>
+<!-- Tailwind vendored locally (cdn.tailwindcss.com blocks CORS from file://, which SRI requires) -->
+<script src="./tailwind.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter+Tight:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        obsidian: '#0B0810',
+        deep: '#060409',
+        plum: '#15101D',
+        plumhover: '#1B1428',
+        bronze: '#C9A66B',
+        bronzehover: '#D4B47C',
+        bronzedeep: '#B69155',
+        cream: '#F3EFE7',
+        warm: '#FFF6E8',
+        wine: '#4A1828',
+        succ: '#9CC9A8',
+      },
+      fontFamily: {
+        fr: ['Fraunces', 'serif'],
+        it: ['"Inter Tight"', 'sans-serif'],
+        bb: ['"Bebas Neue"', 'sans-serif'],
+      },
+    },
+  },
+};
+</script>
+<style>
+  body { background: #060409; }
+  .hairline   { border-color: rgba(201,166,107,0.18); }
+  .hairline-s { border-color: rgba(201,166,107,0.35); }
+  .fg-soft  { color: rgba(243,239,231,0.78); }
+  .fg-dim   { color: rgba(243,239,231,0.50); }
+  .fg-faint { color: rgba(243,239,231,0.28); }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  /* Bronze top-edge signature hairline */
+  .card-edge { position: relative; }
+  .card-edge::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,166,107,0.85), transparent);
+    opacity: .45; z-index: 2; pointer-events: none;
+  }
+
+  /* Atmosphere — radial recipe from home-default-design.md */
+  .atmosphere {
+    background:
+      radial-gradient(120% 70% at 8% -4%,  rgba(74,24,40,0.55) 0%, transparent 52%),
+      radial-gradient(90% 55% at 100% 0%,  rgba(201,166,107,0.16) 0%, transparent 48%),
+      radial-gradient(140% 90% at 50% 118%, #15101D 0%, transparent 62%),
+      #0B0810;
+  }
+
+  /* Eyebrow with leading hairline */
+  .eyebrow { display:flex; align-items:center; gap:8px;
+    font-family:"Inter Tight"; font-weight:600; font-size:11px; letter-spacing:.18em;
+    text-transform:uppercase; color:#C9A66B; }
+  .eyebrow::before { content:""; width:24px; height:1px; background:rgba(201,166,107,0.5); }
+  .eyebrow.no-rule::before { display:none; }
+
+  /* Passport paper */
+  .paper {
+    background-color:#efe4cf;
+    background-image:
+      repeating-linear-gradient(45deg,  rgba(205,185,143,.35) 0 .6px, transparent .6px 11px),
+      repeating-linear-gradient(-45deg, rgba(205,185,143,.35) 0 .6px, transparent .6px 11px);
+  }
+  .gutter {
+    background: linear-gradient(90deg,
+      rgba(90,74,42,.10) 0%, transparent 12%, transparent 46%,
+      rgba(90,74,42,.22) 49.4%, rgba(90,74,42,.34) 50%, rgba(90,74,42,.22) 50.6%,
+      transparent 54%, transparent 88%, rgba(90,74,42,.10) 100%);
+  }
+
+  /* Minimap grid */
+  .mapgrid {
+    background-image:
+      linear-gradient(rgba(201,166,107,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,166,107,0.07) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  .scrim-b { background: linear-gradient(180deg, transparent 30%, rgba(11,8,16,.55) 72%, rgba(11,8,16,.92) 100%); }
+
+  .phone-bezel {
+    background: linear-gradient(160deg, #3a3340 0%, #17131d 38%, #2c2531 62%, #100c16 100%);
+    box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 4px 18px rgba(201,166,107,.06);
+  }
+  .glow-bronze { box-shadow: 0 6px 22px rgba(201,166,107,.22); }
+</style>
+</head>
+<body class="font-it text-cream antialiased">
+
+<!-- ════ deterministic decorations (stars, QR) ════ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="girih" width="56" height="56" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#FFF6E8" stroke-width="1">
+        <rect x="14" y="14" width="28" height="28"/>
+        <rect x="14" y="14" width="28" height="28" transform="rotate(45 28 28)"/>
+        <circle cx="28" cy="28" r="5"/>
+        <path d="M0 28 H14 M42 28 H56 M28 0 V14 M28 42 V56"/>
+      </g>
+    </pattern>
+  </defs>
+  <symbol id="i-house" viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7V20a1 1 0 0 1-1 1h-4.5v-5.5h-5V21H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-house-f" viewBox="0 0 24 24"><path d="M4 11.5 12 4.5l8 7V20a1 1 0 0 1-1 1h-4.5v-5.5h-5V21H5a1 1 0 0 1-1-1z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4.5 9 5.6 4.8A1 1 0 0 1 6.6 4h10.8a1 1 0 0 1 1 .8L19.5 9M4.5 9h15M4.5 9v10.2a.8.8 0 0 0 .8.8h13.4a.8.8 0 0 0 .8-.8V9M9.5 20v-5h5v5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3.5 8.5v-2a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1v2a2.5 2.5 0 0 0 0 7v2a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-2a2.5 2.5 0 0 0 0-7Z" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M14 6v2.2M14 11v2.2M14 16v1.8" stroke="currentColor" stroke-width="1.75" stroke-dasharray="2 2.4"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v6a5 5 0 0 1-10 0V4ZM7 5.5H4.5a0 0 0 0 0 0 0c0 2.8 1 4.5 2.9 5M17 5.5h2.5c0 2.8-1 4.5-2.9 5M12 15v3.5M8.5 21h7M9.5 18.5h5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M6.4 18.2c1-2.2 3-3.4 5.6-3.4s4.6 1.2 5.6 3.4" fill="none" stroke="currentColor" stroke-width="1.75"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5.5a6 6 0 0 1 12 0V16l1.5 2.2H4.5L6 16ZM10 20.5a2.2 2.2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6.5 19 12l-6 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M4 10h16M8.5 3.5v3.5M15.5 3.5v3.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.75"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="currentColor" stroke-width="1.75"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5.5 12h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="M4 18 3 7.5l5 3.5 4-6 4 6 5-3.5L20 18H4Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3.5v11M8 7l4-3.5L16 7M5.5 11.5v8a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3c.6 4.8 2.4 6.9 7 7.5-4.6.6-6.4 2.7-7 7.5-.6-4.8-2.4-6.9-7-7.5 4.6-.6 6.4-2.7 7-7.5Z" fill="currentColor"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.2A8.2 8.2 0 0 1 9.8 4.5 8.2 8.2 0 1 0 19.5 14.2Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8Z" fill="currentColor"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.4 4.4 0 0 1 12 7.4 4.4 4.4 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart-f" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.4 4.4 0 0 1 12 7.4 4.4 4.4 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z" fill="currentColor"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8.5 5.8v12.4L19 12 8.5 5.8Z" fill="currentColor"/></symbol>
+  <symbol id="i-bt" viewBox="0 0 24 24"><path d="M11.5 2.5v19l6-5-9.5-8M11.5 2.5l6 5-9.5 8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M12 3v2.6M12 18.4V21M21 12h-2.6M5.6 12H3M18.4 5.6l-1.9 1.9M7.5 16.5l-1.9 1.9M18.4 18.4l-1.9-1.9M7.5 7.5 5.6 5.6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16M4 12h16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="m8.8 14.2-1.3 6.3 4.5-2.6 4.5 2.6-1.3-6.3" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="4" y="8.5" width="16" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M5.5 12.5V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6.5M12 8.5V20M12 8.5C9 8.5 7.2 7.4 7.2 5.9S9.3 3.6 12 8.5Zm0 0c3 0 4.8-1.1 4.8-2.6S14.7 3.6 12 8.5Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M7.5 5v14M16.5 5v14M3.5 9.5h4M3.5 14.5h4M16.5 9.5h4M16.5 14.5h4" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="m9 4.5-5 2v13l5-2 6 2 5-2v-13l-5 2-6-2ZM9 4.5v13M15 6.5v13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bldg" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M9 7.5h2M13 7.5h2M9 11h2M13 11h2M9 14.5h2M13 14.5h2M10 20.5v-3h4v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-tent" viewBox="0 0 24 24"><path d="M12 4 2.5 20h19L12 4ZM12 4v16M12 20l-4-6M12 20l4-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 5.8v5.4c0 4.4 3 7.7 7 9.3 4-1.6 7-4.9 7-9.3V5.8L12 3Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M14.5 8V5.5a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V16M10 12h10.5M17 8.5l3.5 3.5-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7.2 3.8 9 3.2a1 1 0 0 1 1.2.5l1.3 2.8a1 1 0 0 1-.3 1.2L9.7 8.9a12.5 12.5 0 0 0 5.4 5.4l1.2-1.5a1 1 0 0 1 1.2-.3l2.8 1.3a1 1 0 0 1 .5 1.2l-.6 1.8a1.6 1.6 0 0 1-1.6 1.2C11.9 17.6 6.4 12.1 6 5.4a1.6 1.6 0 0 1 1.2-1.6Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M3.5 12h17M12 3.5c2.4 2.3 3.6 5.2 3.6 8.5s-1.2 6.2-3.6 8.5c-2.4-2.3-3.6-5.2-3.6-8.5s1.2-6.2 3.6-8.5Z" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24"><path d="m12 2.7 2.3 1.7 2.8-.2 1 2.6 2.4 1.5-.7 2.7.7 2.7-2.4 1.5-1 2.6-2.8-.2-2.3 1.7-2.3-1.7-2.8.2-1-2.6-2.4-1.5.7-2.7-.7-2.7L5.9 6.8l1-2.6 2.8.2L12 2.7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.4 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-radio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M6 18a8.5 8.5 0 0 1 0-12M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M7 3.5v6a2 2 0 0 0 2 2v9M9 3.5v5M11 3.5v5M16.5 3.5c-1.7 1-2.5 3-2.5 5.5 0 1.6.8 2.5 2 2.5v9M16.5 3.5v17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5.5 8h11v8a4 4 0 0 1-4 4h-3a4 4 0 0 1-4-4V8ZM16.5 9.5h1.5a2.5 2.5 0 0 1 0 5h-1.5M8 5.5C8 4.5 9 4.5 9 3.5M12 5.5c0-1 1-1 1-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 11V5.8a1.3 1.3 0 0 1 2.6 0V10M10.6 10V4.3a1.3 1.3 0 0 1 2.6 0V10M13.2 10V5.3a1.3 1.3 0 0 1 2.6 0V11M15.8 11V7.3a1.3 1.3 0 0 1 2.6 0v6.2c0 4.2-2.5 7-6.4 7-3.2 0-4.6-1.6-6.9-5.4-.5-.9-.4-1.8.4-2.3.7-.4 1.6-.2 2.2.5L8 14.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 3.5 10l6.5 2.5L12.5 19l8-15.5ZM10 12.5l10.5-9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="i-news" viewBox="0 0 24 24"><path d="M4.5 5.5h12v13a1.5 1.5 0 0 0 1.5 1.5H6a1.5 1.5 0 0 1-1.5-1.5v-13ZM16.5 9H19a.5.5 0 0 1 .5.5V18A1.5 1.5 0 0 1 18 19.5M7.5 9h6M7.5 12.5h6M7.5 16h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+</svg>
+
+<!-- ════════════ PAGE HEADER ════════════ -->
+<div class="max-w-[1380px] mx-auto px-10 pt-14 pb-2">
+  <div class="eyebrow no-rule mb-3">Design direction · companion to docs/design-review.md</div>
+  <h1 class="font-fr text-[42px] leading-[1.05] tracking-[-0.01em]">Suhoor Festival <span class="italic text-bronze">— proposed visual direction</span></h1>
+  <p class="fg-soft text-[15px] mt-3 max-w-2xl leading-relaxed">Same obsidian + bronze system the app already owns, executed with one card recipe, a reinstated display serif (Fraunces — already bundled), Bebas numerals, and ceremony on the money moments. Twenty screens covering every surface, annotated.</p>
+
+  <!-- token strip -->
+  <div class="flex flex-wrap items-center gap-6 mt-7 mb-2">
+    <div class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-xl border hairline" style="background:#0B0810"></div>
+      <div class="w-9 h-9 rounded-xl border hairline" style="background:#15101D"></div>
+      <div class="w-9 h-9 rounded-xl" style="background:#C9A66B"></div>
+      <div class="w-9 h-9 rounded-xl" style="background:#4A1828"></div>
+      <div class="w-9 h-9 rounded-xl" style="background:#F3EFE7"></div>
+      <div class="w-9 h-9 rounded-xl" style="background:#9CC9A8"></div>
+    </div>
+    <div class="h-8 w-px" style="background:rgba(201,166,107,.2)"></div>
+    <div class="flex items-baseline gap-5">
+      <span class="font-fr text-[22px]">Fraunces <span class="italic text-bronze">display</span></span>
+      <span class="text-[15px] fg-soft">Inter Tight body</span>
+      <span class="font-bb text-[22px] tracking-[0.04em] text-bronze">BEBAS 1 2 3</span>
+    </div>
+    <div class="h-8 w-px" style="background:rgba(201,166,107,.2)"></div>
+    <div class="text-[12px] fg-dim">radius 8 · 12 · 16 · pill &nbsp;&nbsp;hairline rgba(201,166,107,.18) &nbsp;&nbsp;spacing 4-grid</div>
+  </div>
+</div>
+
+<!-- ════════════ PHONES ════════════ -->
+<div class="max-w-[1380px] mx-auto px-10 pb-20">
+<div class="grid grid-cols-3 gap-x-10 gap-y-14 mt-10">
+
+<div class="max-w-[1380px] mx-auto px-10 pb-4 fg-dim text-[13px]">This slice shows screens 1–6. Full set: <a class="text-bronze" href="./index.html">index.html</a> · <a class="text-bronze" href="./part1.html">1–6</a> · <a class="text-bronze" href="./part2.html">7–13</a> · <a class="text-bronze" href="./part3.html">14–20</a></div>
+<!-- ━━━━━━━━━━ 1 · HOME ━━━━━━━━━━ -->
+<div>
+  <div class="phone-bezel rounded-[57px] p-[3px] w-[393px] mx-auto">
+  <div class="relative w-[387px] h-[846px] rounded-[54px] overflow-hidden atmosphere">
+    <div class="starfield absolute inset-0 pointer-events-none" data-n="70"></div>
+
+    <!-- status bar -->
+    <div class="relative z-20 flex items-center justify-between px-9 pt-[17px] text-[14px] font-semibold">
+      <span class="tnum">9:41</span>
+      <div class="absolute left-1/2 -translate-x-1/2 top-[13px] w-[112px] h-[34px] bg-black rounded-full"></div>
+      <span class="flex items-center gap-1.5 opacity-90">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8"/><rect x="13.5" y="0" width="3" height="11" rx="0.8"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 9.2a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8ZM4.9 7.4a4.6 4.6 0 0 1 6.2 0l-1.3 1.4a2.7 2.7 0 0 0-3.6 0L4.9 7.4ZM2.2 4.7a8.4 8.4 0 0 1 11.6 0l-1.3 1.3a6.5 6.5 0 0 0-9 0L2.2 4.7Z"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4Z" fill="currentColor" opacity=".4"/></svg>
+      </span>
+    </div>
+
+    <!-- header row -->
+    <div class="relative z-10 flex items-center justify-between px-5 mt-3">
+      <div class="w-[46px] h-[46px] rounded-full border hairline bg-plum/80 flex items-center justify-center">
+        <svg class="w-[22px] h-[22px] text-cream"><use href="#i-ticket"/></svg>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <svg class="w-[26px] h-[26px] text-bronze -scale-x-100"><use href="#i-moon"/></svg>
+        <span class="font-fr text-[19px] tracking-tight">Suhoor <span class="italic text-bronze">Festival</span></span>
+      </div>
+      <div class="relative w-[46px] h-[46px] rounded-full border hairline bg-plum/80 flex items-center justify-center">
+        <svg class="w-[22px] h-[22px] text-cream"><use href="#i-bell"/></svg>
+        <span class="absolute top-[9px] right-[9px] w-[10px] h-[10px] rounded-full bg-bronze border-2 border-obsidian"></span>
+      </div>
+    </div>
+
+    <!-- greeting -->
+    <div class="relative z-10 px-5 mt-7">
+      <div class="eyebrow no-rule mb-1.5" style="font-size:11px">Tuesday, June 9</div>
+      <div class="font-fr text-[30px] leading-[1.08] tracking-[-0.01em]">Salam, <span class="italic text-bronze">Nour</span></div>
+    </div>
+
+    <!-- countdown hero -->
+    <div class="relative z-10 mx-5 mt-5 card-edge rounded-2xl border hairline overflow-hidden glow-bronze" style="background:#15101DD9">
+      <div class="absolute inset-0 opacity-[0.05]"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#girih)"/></svg></div>
+      <div class="absolute -top-10 -right-8 w-44 h-44 rounded-full" style="background:radial-gradient(circle,rgba(201,166,107,.28),transparent 65%)"></div>
+      <div class="relative p-5">
+        <div class="eyebrow mb-2.5">Next festival</div>
+        <div class="font-fr text-[25px] leading-[1.12] tracking-[-0.01em]">Atlanta Halal<br>World Festival</div>
+        <div class="flex items-center gap-4 mt-2.5 text-[12.5px] fg-soft">
+          <span class="flex items-center gap-1.5"><svg class="w-[14px] h-[14px] text-bronze"><use href="#i-cal"/></svg>Sat &amp; Sun · Jun 20–21</span>
+          <span class="flex items-center gap-1.5"><svg class="w-[14px] h-[14px] text-bronze"><use href="#i-pin"/></svg>Piedmont Park</span>
+        </div>
+        <div class="flex items-end justify-between mt-5">
+          <div class="flex items-baseline gap-2">
+            <span class="font-bb text-[52px] leading-none text-bronze tracking-[0.02em] tnum">11</span>
+            <span class="font-bb text-[20px] tracking-[0.14em] fg-soft mb-[5px]">DAYS TO GO</span>
+          </div>
+          <button class="flex items-center gap-2.5 bg-bronze rounded-[14px] pl-5 pr-2 py-2 text-obsidian">
+            <span class="text-[14px] font-semibold">Get tickets</span>
+            <span class="w-7 h-7 rounded-full bg-obsidian/15 flex items-center justify-center"><svg class="w-4 h-4"><use href="#i-arrow"/></svg></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- section eyebrow -->
+    <div class="relative z-10 px-5 mt-7 mb-3 eyebrow">Happening now</div>
+
+    <!-- feed card: contest -->
+    <div class="relative z-10 mx-5 card-edge rounded-2xl border hairline overflow-hidden" style="background:#15101DD9">
+      <div class="relative h-[118px] overflow-hidden">
+        <div class="absolute inset-0" style="background:linear-gradient(135deg,#4A1828 0%,#7a4a2b 55%,#C9A66B 130%)"></div>
+        <div class="absolute inset-0 opacity-[0.08]"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#girih)"/></svg></div>
+        <div class="absolute inset-0 scrim-b"></div>
+        <div class="absolute top-3 right-3 flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 bg-obsidian/70 border hairline backdrop-blur-sm">
+          <span class="font-bb text-[13px] tracking-[0.1em] text-bronze tnum">ENDS IN 4D 11H</span>
+        </div>
+        <div class="absolute bottom-3 left-4 right-4">
+          <div class="flex items-center gap-1.5 text-[10.5px] font-semibold tracking-[0.16em] text-bronze uppercase mb-1">
+            <svg class="w-[13px] h-[13px]"><use href="#i-trophy"/></svg> Contest
+          </div>
+          <div class="font-fr text-[20px] leading-tight">World Passport Challenge</div>
+        </div>
+      </div>
+      <div class="px-4 py-3.5 flex items-center justify-between border-t hairline">
+        <div class="text-[12.5px] fg-soft">Prize — <span class="font-fr italic text-cream text-[13.5px]">2 VIP tickets, next festival</span></div>
+        <span class="flex items-center gap-1 text-bronze text-[12px] font-medium">Enter <svg class="w-3.5 h-3.5"><use href="#i-arrow"/></svg></span>
+      </div>
+    </div>
+
+    <!-- feed card: announcement -->
+    <div class="relative z-10 mx-5 mt-3 rounded-2xl overflow-hidden border hairline" style="background:#15101DD9">
+      <div class="flex">
+        <div class="w-[3px] self-stretch bg-bronze"></div>
+        <div class="px-4 py-3.5 flex-1">
+          <div class="text-[10.5px] font-semibold tracking-[0.16em] text-bronze uppercase mb-1">Announcement</div>
+          <div class="text-[13.5px] leading-snug fg-soft">Gates open 4:30pm both days — suhoor service starts at 1:00am. Parking map is live.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- tab bar -->
+    <div class="absolute bottom-0 left-0 right-0 z-30 border-t hairline" style="background:rgba(21,16,29,.96)">
+      <div class="grid grid-cols-5 pt-2.5 pb-1 px-2">
+        <div class="flex flex-col items-center gap-1">
+          <div class="relative"><span class="absolute -top-[11px] left-1/2 -translate-x-1/2 w-4 h-[2.5px] rounded-full bg-bronze"></span>
+          <svg class="w-6 h-6 text-bronze"><use href="#i-house-f"/></svg></div>
+          <span class="text-[10px] font-medium text-bronze">Home</span>
+        </div>
+        <div class="flex flex-col items-center gap-1"><svg class="w-6 h-6 fg-dim"><use href="#i-store"/></svg><span class="text-[10px] fg-dim">Restaurants</span></div>
+        <div class="flex flex-col items-center gap-1"><svg class="w-6 h-6 fg-dim"><use href="#i-ticket"/></svg><span class="text-[10px] fg-dim">Festival</span></div>
+        <div class="flex flex-col items-center gap-1"><svg class="w-6 h-6 fg-dim"><use href="#i-trophy"/></svg><span class="text-[10px] fg-dim">Contests</span></div>
+        <div class="flex flex-col items-center gap-1"><svg class="w-6 h-6 fg-dim"><use href="#i-user"/></svg><span class="text-[10px] fg-dim">Profile</span></div>
+      </div>
+      <div class="flex justify-center pb-2 pt-1"><div class="w-[136px] h-[5px] rounded-full bg-cream/25"></div></div>
+    </div>
+  </div>
+  </div>
+  <div class="w-[393px] mx-auto mt-5">
+    <div class="font-fr text-[19px]">1 · Home</div>
+    <p class="text-[13px] fg-dim leading-relaxed mt-1">Greeting + countdown hero gives the feed a “tonight” moment (§6). One card chrome with the bronze top-edge signature; card type as eyebrow chip, not border color. Branded tab bar — filled icon + bronze tick (§5).</p>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━ 2 · TICKET PURCHASE ━━━━━━━━━━ -->
+<div>
+  <div class="phone-bezel rounded-[57px] p-[3px] w-[393px] mx-auto">
+  <div class="relative w-[387px] h-[846px] rounded-[54px] overflow-hidden bg-obsidian">
+    <!-- hero -->
+    <div class="relative h-[248px] overflow-hidden">
+      <div class="absolute inset-0" style="background:linear-gradient(150deg,#2a1020 0%,#4A1828 38%,#7a4a2b 78%,#C9A66B 140%)"></div>
+      <div class="absolute inset-0 opacity-[0.07]"><svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#girih)"/></svg></div>
+      <div class="starfield absolute inset-0" data-n="26"></div>
+      <div class="absolute inset-0 scrim-b"></div>
+      <!-- status bar -->
+      <div class="relative z-20 flex items-center justify-between px-9 pt-[17px] text-[14px] font-semibold">
+        <span class="tnum">9:41</span>
+        <div class="absolute left-1/2 -translate-x-1/2 top-[13px] w-[112px] h-[34px] bg-black rounded-full"></div>
+        <span class="flex items-center gap-1.5 opacity-90">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8"/><rect x="13.5" y="0" width="3" height="11" rx="0.8"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/></svg>
+        </span>
+      </div>
+      <div class="relative z-10 px-5 mt-2">
+        <div class="w-[42px] h-[42px] rounded-full bg-obsidian/55 border hairline flex items-center justify-center backdrop-blur-sm">
+          <svg class="w-5 h-5 text-cream"><use href="#i-chev-l"/></svg>
+        </div>
+      </div>
+      <div class="absolute bottom-4 left-5 right-5 z-10">
+        <div class="eyebrow no-rule mb-1.5">Jun 20–21 · Piedmont Park, Atlanta</div>
+        <div class="font-fr text-[30px] leading-[1.06] tracking-[-0.01em]">Atlanta Halal<br>World Festival</div>
+      </div>
+    </div>
+
+    <div class="px-5 mt-5 eyebrow mb-3">Choose your tickets</div>
+
+    <!-- GA tier — ticket-shaped -->
+    <div class="relative mx-5 card-edge rounded-2xl border hairline bg-plum overflow-hidden">
+      <div class="absolute top-1/2 -translate-y-1/2 -left-[10px] w-5 h-5 rounded-full bg-obsidian border-r hairline"></div>
+      <div class="absolute top-1/2 -translate-y-1/2 -right-[10px] w-5 h-5 rounded-full bg-obsidian border-l hairline"></div>
+      <div class="px-5 pt-4 pb-3 flex items-start justify-between gap-3">
+        <div>
+          <div class="text-[15px] font-semibold">General Admission</div>
+          <div class="text-[12px] fg-soft mt-0.5 leading-relaxed">Both days · all stages &amp; the suhoor bazaar</div>
+        </div>
+        <div class="text-right"><span class="font-bb text-[27px] leading-none text-bronze tnum">$15</span></div>
+      </div>
+      <div class="mx-5 border-t border-dashed hairline"></div>
+      <div class="px-5 py-3 flex items-center justify-between">
+        <span class="text-[12px] fg-soft tnum">2 in order</span>
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-obsidian border hairline flex items-center justify-center"><svg class="w-4 h-4 fg-soft"><use href="#i-minus"/></svg></span>
+          <span class="text-[16px] font-semibold w-5 text-center tnum">2</span>
+          <span class="w-9 h-9 rounded-full bg-bronze flex items-center justify-center"><svg class="w-4 h-4 text-obsidian"><use href="#i-plus"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIP tier -->
+    <div class="relative mx-5 mt-3 rounded-2xl border hairline-s bg-plum overflow-hidden">
+      <div class="flex items-center justify-between bg-bronze px-5 py-[7px]">
+        <span class="font-bb text-[14px] tracking-[0.18em] text-obsidian">VIP · MAJLIS LOUNGE</span>
+        <span class="text-[10.5px] font-semibold text-obsidian/70 tracking-[0.1em] uppercase">82% sold</span>
+      </div>
+      <div class="h-[3px] bg-obsidian/40"><div class="h-full bg-warm/90" style="width:82%"></div></div>
+      <div class="absolute top-[64%] -left-[10px] w-5 h-5 rounded-full bg-obsidian"></div>
+      <div class="absolute top-[64%] -right-[10px] w-5 h-5 rounded-full bg-obsidian"></div>
+      <div class="px-5 pt-3.5 pb-3 flex items-start justify-between gap-3">
+        <div>
+          <div class="text-[15px] font-semibold">VIP Pass</div>
+          <div class="text-[12px] fg-soft mt-0.5 leading-relaxed">Lounge seating, suhoor plate &amp; fast-lane entry</div>
+        </div>
+        <div class="text-right"><span class="font-bb text-[27px] leading-none text-bronze tnum">$45</span></div>
+      </div>
+      <div class="mx-5 border-t border-dashed hairline"></div>
+      <div class="px-5 py-3 flex items-center justify-between">
+        <span class="text-[12px] fg-soft tnum">1 in order</span>
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-obsidian border hairline flex items-center justify-center"><svg class="w-4 h-4 fg-soft"><use href="#i-minus"/></svg></span>
+          <span class="text-[16px] font-semibold w-5 text-center tnum">1</span>
+          <span class="w-9 h-9 rounded-full bg-bronze flex items-center justify-center"><svg class="w-4 h-4 text-obsidian"><use href="#i-plus"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Family pack -->
+    <div class="relative mx-5 mt-3 card-edge rounded-2xl border hairline bg-plum overflow-hidden">
+      <div class="absolute top-1/2 -translate-y-1/2 -left-[10px] w-5 h-5 rounded-full bg-obsidian border-r hairline"></div>
+      <div class="absolute top-1/2 -translate-y-1/2 -right-[10px] w-5 h-5 rounded-full bg-obsidian border-l hairline"></div>
+      <div class="px-5 pt-4 pb-3 flex items-start justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[15px] font-semibold">Family Pack</span>
+            <span class="rounded-md px-2 py-[3px] text-[10px] font-semibold tracking-[0.1em] uppercase text-bronze" style="background:rgba(201,166,107,.16)">1 pack = 5 tickets</span>
+          </div>
+          <div class="text-[12px] fg-soft mt-0.5">Five GA tickets — save $10</div>
+        </div>
+        <div class="text-right">
+          <span class="font-bb text-[27px] leading-none text-bronze tnum">$65</span>
+          <div class="text-[10.5px] fg-dim mt-0.5">per pack</div>
+        </div>
+      </div>
+      <div class="mx-5 border-t border-dashed hairline"></div>
+      <div class="px-5 py-3 flex items-center justify-between">
+        <span class="text-[12px] fg-dim">Add packs</span>
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-obsidian border hairline flex items-center justify-center opacity-40"><svg class="w-4 h-4 fg-soft"><use href="#i-minus"/></svg></span>
+          <span class="text-[16px] font-semibold w-5 text-center tnum">0</span>
+          <span class="w-9 h-9 rounded-full bg-bronze flex items-center justify-center"><svg class="w-4 h-4 text-obsidian"><use href="#i-plus"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- sticky checkout -->
+    <div class="absolute bottom-0 left-0 right-0 border-t hairline" style="background:rgba(11,8,16,.97)">
+      <div class="px-5 pt-3.5 flex items-center justify-between">
+        <div>
+          <div class="text-[11.5px] fg-soft tnum">3 tickets</div>
+          <div class="font-fr text-[24px] leading-tight tnum">$75.00</div>
+        </div>
+        <button class="flex items-center gap-2.5 bg-bronze rounded-[14px] pl-6 pr-2 py-2.5 text-obsidian glow-bronze">
+          <span class="text-[15px] font-semibold">Checkout</span>
+          <span class="w-8 h-8 rounded-full bg-obsidian/15 flex items-center justify-center"><svg class="w-[18px] h-[18px]"><use href="#i-arrow"/></svg></span>
+        </button>
+      </div>
+      <div class="flex items-center justify-center gap-1.5 pt-2.5 pb-2 text-[11px] fg-dim">
+        <svg class="w-[13px] h-[13px]"><use href="#i-lock"/></svg> Secure checkout · Stripe · Apple Pay
+      </div>
+      <div class="flex justify-center pb-2"><div class="w-[136px] h-[5px] rounded-full bg-cream/25"></div></div>
+    </div>
+  </div>
+  </div>
+  <div class="w-[393px] mx-auto mt-5">
+    <div class="font-fr text-[19px]">2 · Ticket purchase</div>
+    <p class="text-[13px] fg-dim leading-relaxed mt-1">Hero gives the revenue screen art direction (girih pattern fallback). Tiers are ticket-shaped — notches + dashed perforation; VIP outranks GA with a bronze band + honest scarcity bar. Trust row under the total (§7).</p>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━ 3 · WALLET ━━━━━━━━━━ -->
+<div>
+  <div class="phone-bezel rounded-[57px] p-[3px] w-[393px] mx-auto">
+  <div class="relative w-[387px] h-[846px] rounded-[54px] overflow-hidden atmosphere">
+    <div class="starfield absolute inset-0 pointer-events-none" data-n="40"></div>
+    <!-- status bar -->
+    <div class="relative z-20 flex items-center justify-between px-9 pt-[17px] text-[14px] font-semibold">
+      <span class="tnum">9:41</span>
+      <div class="absolute left-1/2 -translate-x-1/2 top-[13px] w-[112px] h-[34px] bg-black rounded-full"></div>
+      <span class="flex items-center gap-1.5 opacity-90">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8"/><rect x="13.5" y="0" width="3" height="11" rx="0.8"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/></svg>
+      </span>
+    </div>
+    <!-- header -->
+    <div class="relative z-10 flex items-center gap-3 px-5 mt-3">
+      <div class="w-[42px] h-[42px] rounded-full border hairline bg-plum/80 flex items-center justify-center">
+        <svg class="w-5 h-5 text-cream"><use href="#i-chev-l"/></svg>
+      </div>
+      <span class="font-fr text-[26px] tracking-[-0.01em]">Your tickets</span>
+    </div>
+
+    <!-- expanded ticket -->
+    <div class="relative z-10 mx-4 mt-5 rounded-2xl overflow-hidden border hairline-s bg-plum" style="box-shadow:0 14px 40px rgba(201,166,107,.16)">
+      <div class="h-[3px] bg-bronze"></div>
+      <div class="h-px bg-bronze opacity-40"></div>
+      <div class="px-5 pt-4 pb-4">
+        <div class="flex items-center justify-between">
+          <span class="font-bb text-[15px] tracking-[0.16em] text-bronze">VIP · ADMIT ONE</span>
+          <span class="flex items-center gap-1 rounded-full px-2.5 py-[5px]" style="background:rgba(156,201,168,.16);border:1px solid rgba(156,201,168,.6)">
+            <svg class="w-3 h-3 text-succ"><use href="#i-check"/></svg>
+            <span class="text-[10.5px] font-medium tracking-[0.1em] uppercase text-succ">1 of 3 in</span>
+          </span>
+        </div>
+        <div class="font-fr text-[24px] leading-[1.1] mt-2.5">Atlanta Halal World Festival</div>
+        <div class="flex items-center gap-4 mt-2 text-[12.5px] fg-soft">
+          <span class="flex items-center gap-1.5"><svg class="w-[14px] h-[14px] text-bronze"><use href="#i-cal"/></svg>Jun 20 – 21</span>
+          <span class="flex items-center gap-1.5"><svg class="w-[14px] h-[14px] text-bronze"><use href="#i-pin"/></svg>Piedmont Park</span>
+        </div>
+      </div>
+
+      <!-- perforation -->
+      <div class="relative h-5">
+        <div class="absolute top-1/2 -translate-y-1/2 -left-[11px] w-[22px] h-[22px] rounded-full bg-obsidian border hairline"></div>
+        <div class="absolute top-1/2 -translate-y-1/2 -right-[11px] w-[22px] h-[22px] rounded-full bg-obsidian border hairline"></div>
+        <div class="absolute top-1/2 left-5 right-5 border-t-2 border-dashed" style="border-color:rgba(201,166,107,.3)"></div>
+      </div>
+
+      <!-- QR stub -->
+      <div class="px-5 pb-5 pt-1">
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-bb text-[14px] tracking-[0.14em] text-bronze tnum">TICKET 1 OF 3</span>
+          <span class="text-[11.5px] fg-dim">swipe for next →</span>
+        </div>
+        <div class="bg-white rounded-2xl px-5 pt-5 pb-4 flex flex-col items-center">
+          <div id="qr" class="rounded-[4px] overflow-hidden"></div>
+          <div class="mt-3 text-[13px] font-medium" style="color:#0B0810">Yusuf Rahman</div>
+          <div class="text-[10.5px] tracking-[0.14em] uppercase mt-0.5" style="color:rgba(11,8,16,.45)">Show at festival entry</div>
+        </div>
+        <div class="flex items-center justify-center gap-2 mt-4">
+          <span class="w-[20px] h-[6px] rounded-full bg-bronze"></span>
+          <span class="w-[6px] h-[6px] rounded-full bg-cream/25"></span>
+          <span class="w-[6px] h-[6px] rounded-full bg-cream/25"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- collapsed stack behind -->
+    <div class="absolute bottom-0 left-0 right-0 z-10 px-4 pb-9">
+      <div class="card-edge rounded-2xl border hairline bg-plum px-5 pt-3.5 pb-7 -mb-3">
+        <div class="flex items-center justify-between">
+          <span class="font-bb text-[14px] tracking-[0.14em] text-bronze">GA × 2 · SUHOOR FESTIVAL 2027</span>
+          <span class="font-bb text-[12px] tracking-[0.14em] fg-dim">ADMIT 2</span>
+        </div>
+      </div>
+      <div class="card-edge rounded-2xl border hairline bg-plumhover px-5 pt-3.5 pb-4 relative">
+        <div class="flex items-center justify-between">
+          <span class="font-bb text-[14px] tracking-[0.14em] text-bronze">FAMILY PACK · EID BAZAAR</span>
+          <span class="text-[10.5px] font-medium tracking-[0.1em] uppercase rounded-full px-2.5 py-[4px] text-bronze" style="background:rgba(201,166,107,.14);border:1px solid rgba(201,166,107,.5)">Processing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="w-[393px] mx-auto mt-5">
+    <div class="font-fr text-[19px]">3 · Wallet &amp; QR</div>
+    <p class="text-[13px] fg-dim leading-relaxed mt-1">The existing morph stays. Added: perforation notches at the stub line, white QR panel with holder name at 13px, brightness auto-bump, animated page dots, green draw-on check when a scan lands via polling (§8).</p>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━ 4 · PASSPORT ━━━━━━━━━━ -->
+<div>
+  <div class="phone-bezel rounded-[57px] p-[3px] w-[393px] mx-auto">
+  <div class="relative w-[387px] h-[846px] rounded-[54px] overflow-hidden atmosphere">
+    <div class="starfield absolute inset-0 pointer-events-none" data-n="40"></div>
+    <!-- status bar -->
+    <div class="relative z-20 flex items-center justify-between px-9 pt-[17px] text-[14px] font-semibold">
+      <span class="tnum">9:41</span>
+      <div class="absolute left-1/2 -translate-x-1/2 top-[13px] w-[112px] h-[34px] bg-black rounded-full"></div>
+      <span class="flex items-center gap-1.5 opacity-90">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8"/><rect x="13.5" y="0" width="3" height="11" rx="0.8"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/></svg>
+      </span>
+    </div>
+
+    <!-- stamp-earned toast -->
+    <div class="relative z-30 mx-12 mt-3 flex items-center gap-3 rounded-2xl border hairline-s px-4 py-3 glow-bronze" style="background:rgba(21,16,29,.97)">
+      <div class="w-9 h-9 rounded-full flex items-center justify-center" style="background:rgba(201,166,107,.16)">
+        <svg class="w-5 h-5 text-bronze"><use href="#i-spark"/></svg>
+      </div>
+      <div class="flex-1">
+        <div class="text-[13px] font-semibold leading-tight">Stamp earned — Morocco</div>
+        <div class="text-[11.5px] fg-soft">8 countries to your next reward</div>
+      </div>
+      <span class="text-[18px]">🇲🇦</span>
+    </div>
+
+    <!-- header -->
+    <div class="relative z-10 flex items-center gap-3 px-5 mt-4">
+      <div class="w-[42px] h-[42px] rounded-full border hairline bg-plum/80 flex items-center justify-center">
+        <svg class="w-5 h-5 text-cream"><use href="#i-chev-l"/></svg>
+      </div>
+      <span class="font-fr text-[26px] tracking-[-0.01em]">My passport</span>
+    </div>
+
+    <!-- progress -->
+    <div class="relative z-10 px-5 mt-4">
+      <div class="flex items-baseline justify-between mb-2">
+        <span class="eyebrow no-rule">Atlanta Halal World Festival</span>
+        <span class="font-bb text-[16px] tracking-[0.1em] text-bronze tnum">9 / 24 COUNTRIES</span>
+      </div>
+      <div class="h-[4px] rounded-full bg-plumhover overflow-hidden"><div class="h-full rounded-full bg-bronze" style="width:37.5%"></div></div>
+    </div>
+
+    <!-- passport page -->
+    <div class="relative z-10 mx-5 mt-4 paper rounded-2xl overflow-hidden" style="border:2px solid #cdb98f">
+      <div class="absolute inset-[7px] rounded-xl pointer-events-none" style="border:1px solid rgba(205,185,143,.6)"></div>
+      <div class="gutter absolute inset-0 pointer-events-none z-20"></div>
+      <div class="relative pt-4 pb-3 px-4">
+        <div class="text-center" style="color:#5a4a2a">
+          <div class="text-[11px] font-semibold tracking-[0.22em] uppercase">✦ Atlanta Halal World Festival ✦</div>
+          <div class="text-[10px] tracking-[0.3em] uppercase opacity-70 mt-0.5">Passport</div>
+        </div>
+        <div class="h-px mt-2.5" style="background:rgba(205,185,143,.6)"></div>
+
+        <!-- stamps -->
+        <div class="relative h-[300px] mt-1">
+          <div class="stamp absolute" style="left:4px;  top:8px;   transform:rotate(-9deg)"  data-c="MOROCCO"  data-ink="#9c2b2b" data-f="🇲🇦"></div>
+          <div class="stamp absolute" style="left:92px; top:26px;  transform:rotate(6deg)"   data-c="TÜRKIYE"  data-ink="#2b3f7a" data-f="🇹🇷"></div>
+          <div class="stamp absolute" style="left:182px;top:2px;   transform:rotate(-4deg)"  data-c="YEMEN"    data-ink="#2f6f4a" data-f="🇾🇪"></div>
+          <div class="stamp absolute boxed" style="left:216px;top:88px; transform:rotate(8deg)" data-c="BOSNIA" data-ink="#6b2f5e" data-f="🇧🇦"></div>
+          <div class="stamp absolute" style="left:8px;  top:104px; transform:rotate(5deg)"   data-c="SOMALIA"  data-ink="#7a5a2b" data-f="🇸🇴"></div>
+          <div class="stamp absolute boxed" style="left:104px;top:122px;transform:rotate(-7deg)" data-c="EGYPT" data-ink="#2f6f6a" data-f="🇪🇬"></div>
+          <div class="stamp absolute" style="left:198px;top:180px; transform:rotate(3deg)"   data-c="PAKISTAN" data-ink="#2b3f7a" data-f="🇵🇰"></div>
+          <div class="stamp absolute" style="left:24px; top:200px; transform:rotate(-6deg)"  data-c="INDONESIA" data-ink="#9c2b2b" data-f="🇮🇩"></div>
+          <div class="stamp absolute fresh" style="left:114px;top:202px;transform:rotate(7deg)" data-c="PALESTINE" data-ink="#2f6f4a" data-f="🇵🇸"></div>
+        </div>
+
+        <div class="text-center text-[8.5px] tracking-[0.2em] uppercase mt-1" style="color:rgba(90,74,42,.6)">Collect a stamp from every country · 9 collected</div>
+        <div class="flex justify-between px-2 mt-1.5 text-[11px] font-semibold" style="color:rgba(90,74,42,.45)"><span>18</span><span>19</span></div>
+      </div>
+    </div>
+
+    <!-- actions -->
+    <div class="relative z-10 mx-5 mt-4 flex gap-3">
+      <button class="flex-1 flex items-center justify-center gap-2 rounded-[14px] border hairline-s py-3.5 text-[14px] font-semibold text-bronze" style="background:rgba(201,166,107,.12)">
+        <svg class="w-[18px] h-[18px]"><use href="#i-share"/></svg> Share my passport
+      </button>
+      <button class="flex items-center justify-center gap-1.5 rounded-[14px] border hairline py-3.5 px-4 text-[13px] font-medium fg-soft bg-plum/80">
+        Leaderboard <svg class="w-4 h-4 text-bronze"><use href="#i-arrow"/></svg>
+      </button>
+    </div>
+    <div class="relative z-10 text-center mt-3 text-[11.5px] fg-dim">Order from any vendor booth to ink its country</div>
+  </div>
+  </div>
+  <div class="w-[393px] mx-auto mt-5">
+    <div class="font-fr text-[19px]">4 · Passport</div>
+    <p class="text-[13px] fg-dim leading-relaxed mt-1">The page itself doesn't change — it's already the best asset. Added ceremony: progress denominator drives orders, fresh stamp lands with overshoot scale + heavy haptic, toast confirms the earn, branded share frame (§9).</p>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━ 5 · ORDER TRACKER ━━━━━━━━━━ -->
+<div>
+  <div class="phone-bezel rounded-[57px] p-[3px] w-[393px] mx-auto">
+  <div class="relative w-[387px] h-[846px] rounded-[54px] overflow-hidden bg-obsidian">
+    <!-- status bar -->
+    <div class="relative z-20 flex items-center justify-between px-9 pt-[17px] text-[14px] font-semibold">
+      <span class="tnum">9:41</span>
+      <div class="absolute left-1/2 -translate-x-1/2 top-[13px] w-[112px] h-[34px] bg-black rounded-full"></div>
+      <span class="flex items-center gap-1.5 opacity-90">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8"/><rect x="13.5" y="0" width="3" height="11" rx="0.8"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/></svg>
+      </span>
+    </div>
+    <!-- header -->
+    <div class="relative z-10 flex items-center gap-3 px-5 mt-3">
+      <div class="w-[42px] h-[42px] rounded-full border hairline bg-plum/80 flex items-center justify-center">
+        <svg class="w-5 h-5 text-cream"><use href="#i-chev-l"/></svg>
+      </div>
+      <div>
+        <div class="text-[10.5px] font-semibold tracking-[0.16em] uppercase fg-dim tnum">Order #1042</div>
+        <div class="font-fr text-[20px] leading-tight">Karak Chai Co.</div>
+      </div>
+    </div>
+
+    <!-- READY hero -->
+    <div class="relative z-10 mx-5 mt-4 rounded-2xl overflow-hidden border" style="border-color:rgba(156,201,168,.45);background:linear-gradient(180deg,rgba(156,201,168,.13),rgba(156,201,168,.05))">
+      <div class="relative px-5 pt-5 pb-5 text-center">
+        <span class="absolute left-7 top-6 text-succ opacity-80"><svg class="w-3.5 h-3.5"><use href="#i-spark"/></svg></span>
+        <span class="absolute right-8 top-12 text-bronze opacity-70"><svg class="w-3 h-3"><use href="#i-spark"/></svg></span>
+        <span class="absolute left-12 bottom-8 text-bronze opacity-60"><svg class="w-2.5 h-2.5"><use href="#i-spark"/></svg></span>
+        <span class="absolute right-12 bottom-16 text-succ opacity-60"><svg class="w-2.5 h-2.5"><use href="#i-spark"/></svg></span>
+        <div class="flex items-center justify-center gap-1.5 text-succ">
+          <svg class="w-4 h-4"><use href="#i-check"/></svg>
+          <span class="font-bb text-[22px] tracking-[0.16em]">READY FOR PICKUP</span>
+        </div>
+        <div class="font-bb text-[64px] leading-[0.95] text-bronze tracking-[0.04em] mt-2">BOOTH B-12</div>
+        <div class="text-[12.5px] fg-soft mt-1.5">Show this screen at the counter · picked up by 11:40pm</div>
+      </div>
+    </div>
+
+    <!-- minimap -->
+    <div class="relative z-10 mx-5 mt-3 rounded-2xl border hairline overflow-hidden mapgrid bg-plum h-[128px]">
+      <div class="absolute left-[18%] top-[24%] w-9 h-6 rounded-[5px] border hairline bg-plumhover"></div>
+      <div class="absolute left-[38%] top-[58%] w-9 h-6 rounded-[5px] border hairline bg-plumhover"></div>
+      <div class="absolute left-[70%] top-[20%] w-9 h-6 rounded-[5px] border hairline bg-plumhover"></div>
+      <div class="absolute left-[58%] top-[44%]">
+        <span class="absolute -inset-3 rounded-full" style="background:radial-gradient(circle,rgba(201,166,107,.35),transparent 70%)"></span>
+        <span class="relative block w-7 h-7 rounded-full bg-bronze border-[3px] border-obsidian"></span>
+      </div>
+      <div class="absolute right-3 bottom-2.5 text-[10px] tracking-[0.14em] uppercase fg-dim">Main bazaar row</div>
+    </div>
+
+    <!-- timeline -->
+    <div class="relative z-10 mx-5 mt-3 card-edge rounded-2xl border hairline bg-plum px-5 py-4">
+      <div class="flex items-center">
+        <span class="w-4 h-4 rounded-full bg-bronze flex items-center justify-center"><svg class="w-2.5 h-2.5 text-obsidian"><use href="#i-check"/></svg></span>
+        <span class="flex-1 h-[2px] bg-bronze"></span>
+        <span class="w-4 h-4 rounded-full bg-bronze flex items-center justify-center"><svg class="w-2.5 h-2.5 text-obsidian"><use href="#i-check"/></svg></span>
+        <span class="flex-1 h-[2px] bg-bronze"></span>
+        <span class="w-4 h-4 rounded-full bg-bronze flex items-center justify-center"><svg class="w-2.5 h-2.5 text-obsidian"><use href="#i-check"/></svg></span>
+        <span class="flex-1 h-[2px] bg-bronze"></span>
+        <span class="relative w-5 h-5 rounded-full bg-succ border-2" style="border-color:#FFF6E8">
+          <span class="absolute -inset-[5px] rounded-full border border-succ opacity-50"></span>
+        </span>
+        <span class="flex-1 h-[2px]" style="background:rgba(201,166,107,.18)"></span>
+        <span class="w-4 h-4 rounded-full" style="background:rgba(201,166,107,.25)"></span>
+      </div>
+      <div class="flex justify-between mt-2 text-[10px] tracking-[0.06em] uppercase">
+        <span class="fg-dim">Placed</span><span class="fg-dim">Received</span><span class="fg-dim">Preparing</span><span class="text-succ font-semibold">Ready</span><span class="fg-faint">Picked up</span>
+      </div>
+    </div>
+
+    <!-- receipt -->
+    <div class="relative z-10 mx-5 mt-3 card-edge rounded-2xl border hairline bg-plum overflow-hidden">
+      <div class="px-5 py-3.5 border-b hairline flex justify-between items-center">
+        <span class="text-[14px] font-semibold">Your order</span>
+        <span class="flex items-center gap-1.5 text-[11px] fg-dim"><svg class="w-3.5 h-3.5"><use href="#i-clock"/></svg>placed 11:18pm</span>
+      </div>
+      <div class="px-5 py-3 space-y-2.5 text-[13.5px]">
+        <div class="flex justify-between"><span class="fg-soft">2× Karak chai</span><span class="tnum">$9.50</span></div>
+        <div class="flex justify-between"><span class="fg-soft">1× Saffron rice bowl</span><span class="tnum">$12.50</span></div>
+        <div class="border-t hairline pt-2.5 flex justify-between text-[12.5px]"><span class="fg-dim">Tax</span><span class="fg-dim tnum">$1.94</span></div>
+        <div class="flex justify-between text-[12.5px]"><span class="fg-dim">Tip</span><span class="fg-dim tnum">$3.00</span></div>
+        <div class="border-t hairline-s pt-2.5 flex justify-between items-baseline">
+          <span class="font-semibold text-[14px]">Total</span><span class="font-fr text-[20px] text-bronze tnum">$26.94</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer actions -->
+    <div class="relative z-10 mx-5 mt-3 flex gap-3">
+      <div class="flex-1 flex items-center gap-2.5 rounded-2xl border hairline bg-plum/70 px-4 py-3">
+        <svg class="w-[18px] h-[18px] text-bronze shrink-0"><use href="#i-lock"/></svg>
+        <span class="text-[12px] fg-soft leading-snug">Pay at pickup · card or cash at the booth</span>
+      </div>
+      <button class="flex items-center justify-center gap-1.5 rounded-2xl border hairline-s py-3 px-4 text-[13px] font-semibold text-bronze" style="background:rgba(201,166,107,.12)">
+        <svg class="w-4 h-4"><use href="#i-pin"/></svg> Directions
+      </button>
+    </div>
+  </div>
+  </div>
+  <div class="w-[393px] mx-auto mt-5">
+    <div class="font-fr text-[19px]">5 · Order tracker</div>
+    <p class="text-[13px] fg-dim leading-relaxed mt-1">The “ready” state becomes the hero: booth number in Bebas 64, one-shot star burst + success haptic when polling flips the status, minimap promoted, receipt with tabular figures (§10). Waiting states reuse the same block with a pulsing current dot.</p>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━ 6 · LEADERBOARD ━━━━━━━━━━ -->
+<div>
+  <div class="phone-bezel rounded-[57px] p-[3px] w-[393px] mx-auto">
+  <div class="relative w-[387px] h-[846px] rounded-[54px] overflow-hidden atmosphere">
+    <div class="starfield absolute inset-0 pointer-events-none" data-n="40"></div>
+    <!-- status bar -->
+    <div class="relative z-20 flex items-center justify-between px-9 pt-[17px] text-[14px] font-semibold">
+      <span class="tnum">9:41</span>
+      <div class="absolute left-1/2 -translate-x-1/2 top-[13px] w-[112px] h-[34px] bg-black rounded-full"></div>
+      <span class="flex items-center gap-1.5 opacity-90">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.8"/><rect x="13.5" y="0" width="3" height="11" rx="0.8"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/></svg>
+      </span>
+    </div>
+    <!-- header -->
+    <div class="relative z-10 flex items-center gap-3 px-5 mt-3">
+      <div class="w-[42px] h-[42px] rounded-full border hairline bg-plum/80 flex items-center justify-center">
+        <svg class="w-5 h-5 text-cream"><use href="#i-chev-l"/></svg>
+      </div>
+      <div>
+        <div class="eyebrow no-rule" style="font-size:10.5px">Vendor leaderboard · by unique customers</div>
+        <div class="font-fr text-[24px] leading-tight tracking-[-0.01em]">Festival top booths</div>
+      </div>
+    </div>
+
+    <!-- prize -->
+    <div class="relative z-10 mx-5 mt-4 rounded-2xl border hairline bg-plum overflow-hidden flex">
+      <div class="w-[3px] self-stretch bg-bronze"></div>
+      <div class="px-4 py-3.5 flex items-center gap-3 flex-1">
+        <svg class="w-6 h-6 text-bronze shrink-0"><use href="#i-trophy"/></svg>
+        <div>
+          <div class="text-[10.5px] font-semibold tracking-[0.16em] uppercase text-bronze">Prize</div>
+          <div class="font-fr italic text-[15.5px] leading-snug mt-0.5">Free premium booth, next festival</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- #1 -->
+    <div class="relative z-10 mx-5 mt-4 card-edge rounded-2xl border hairline-s overflow-hidden glow-bronze" style="background:linear-gradient(135deg,rgba(201,166,107,.2),rgba(21,16,29,.95) 55%)">
+      <div class="px-4 py-4 flex items-center gap-3.5">
+        <div class="relative">
+          <div class="w-[54px] h-[54px] rounded-2xl bg-plumhover border hairline-s flex items-center justify-center font-fr text-[22px] text-bronze">S</div>
+          <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 text-bronze"><svg class="w-5 h-5"><use href="#i-crown"/></svg></span>
+        </div>
+        <div class="flex-1">
+          <div class="text-[15.5px] font-semibold">Saffron &amp; Smoke</div>
+          <div class="text-[11.5px] fg-soft mt-0.5">Booth A-04 · Yemeni mandi</div>
+        </div>
+        <div class="text-right">
+          <div class="font-bb text-[30px] leading-none text-bronze tnum">312</div>
+          <div class="text-[10px] tracking-[0.12em] uppercase fg-dim mt-0.5">customers</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- #2 / #3 -->
+    <div class="relative z-10 mx-5 mt-2.5 rounded-2xl border hairline bg-plum px-4 py-3 flex items-center gap-3.5">
+      <div class="w-7 h-7 rounded-full flex items-center justify-center font-bb text-[15px] tnum" style="background:linear-gradient(160deg,#d7dbe4,#8d93a3);color:#15101D">2</div>
+      <div class="w-[42px] h-[42px] rounded-xl bg-plumhover border hairline flex items-center justify-center font-fr text-[17px] fg-soft">K</div>
+      <div class="flex-1">
+        <div class="text-[14px] font-semibold">Karak Chai Co.</div>
+        <div class="text-[11px] fg-dim">Booth B-12 · Emirati chai</div>
+      </div>
+      <div class="font-bb text-[22px] text-cream/80 tnum">287</div>
+    </div>
+    <div class="relative z-10 mx-5 mt-2.5 rounded-2xl border hairline bg-plum px-4 py-3 flex items-center gap-3.5">
+      <div class="w-7 h-7 rounded-full flex items-center justify-center font-bb text-[15px] tnum" style="background:linear-gradient(160deg,#c89274,#8a5a40);color:#15101D">3</div>
+      <div class="w-[42px] h-[42px] rounded-xl bg-plumhover border hairline flex items-center justify-center font-fr text-[17px] fg-soft">B</div>
+      <div class="flex-1">
+        <div class="text-[14px] font-semibold">Baklava Bar</div>
+        <div class="text-[11px] fg-dim">Booth C-02 · Turkish sweets</div>
+      </div>
+      <div class="font-bb text-[22px] text-cream/80 tnum">244</div>
+    </div>
+
+    <!-- 4 / 5 -->
+    <div class="relative z-10 mx-5 mt-2.5 rounded-2xl border hairline bg-plum/70 px-4 py-3 flex items-center gap-3.5">
+      <div class="w-7 text-center font-fr text-[15px] fg-dim tnum">4</div>
+      <div class="w-[42px] h-[42px] rounded-xl bg-plumhover border hairline flex items-center justify-center font-fr text-[17px] fg-dim">T</div>
+      <div class="flex-1">
+        <div class="text-[14px] font-medium fg-soft">Tandoor Bros</div>
+        <div class="text-[11px] fg-dim">Booth A-09 · Pakistani grill</div>
+      </div>
+      <div class="font-bb text-[20px] fg-dim tnum">198</div>
+    </div>
+    <div class="relative z-10 mx-5 mt-2.5 rounded-2xl border hairline bg-plum/70 px-4 py-3 flex items-center gap-3.5">
+      <div class="w-7 text-center font-fr text-[15px] fg-dim tnum">5</div>
+      <div class="w-[42px] h-[42px] rounded-xl bg-plumhover border hairline flex items-center justify-center font-fr text-[17px] fg-dim">L</div>
+      <div class="flex-1">
+        <div class="text-[14px] font-medium fg-soft">Lantern Coffee</div>
+        <div class="text-[11px] fg-dim">Booth D-01 · Bosnian roasts</div>
+      </div>
+      <div class="font-bb text-[20px] fg-dim tnum">171</div>
+    </div>
+
+    <!-- my rank -->
+    <div class="absolute bottom-0 left-0 right-0 z-20 px-5 pb-9 pt-10" style="background:linear-gradient(180deg,transparent,rgba(6,4,9,.92) 45%)">
+      <div class="rounded-2xl border hairline-s px-4 py-3.5 flex items-center gap-3.5" style="background:rgba(201,166,107,.13)">
+        <div class="w-7 text-center font-bb text-[18px] text-bronze tnum">8</div>
+        <div class="flex-1">
+          <div class="text-[14px] font-semibold">Halal Smash Shack <span class="text-bronze font-medium">· you</span></div>
+          <div class="text-[11px] fg-soft tnum">126 customers · 45 behind 5th place</div>
+        </div>
+        <span class="flex items-center gap-1 text-bronze text-[12px] font-medium">Boost <svg class="w-3.5 h-3.5"><use href="#i-arrow"/></svg></span>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="w-[393px] mx-auto mt-5">
+    <div class="font-fr text-[19px]">6 · Vendor leaderboard</div>
+    <p class="text-[13px] fg-dim leading-relaxed mt-1">Winning looks valuable: #1 gets the crown + bronze gradient field, 2–3 get silver/copper medallions, metrics in Bebas right-rail. Sticky “your rank” chip when off-board — data the RPC already returns (§11).</p>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+/* deterministic seeded RNG so every screenshot is identical */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+/* star fields */
+document.querySelectorAll('.starfield').forEach((el,fi)=>{
+  const n=parseInt(el.dataset.n||'50',10), rnd=mulberry32(40+fi*97);
+  let html='';
+  for(let i=0;i<n;i++){
+    const s=[1,1,1.5,1.5,2.5][Math.floor(rnd()*5)];
+    const x=rnd()*100, y=rnd()*100, o=0.25+rnd()*0.55;
+    const hero=rnd()>0.92;
+    html+=`<span style="position:absolute;left:${x}%;top:${y}%;width:${s}px;height:${s}px;border-radius:50%;background:#FFF6E8;opacity:${o};${hero?'box-shadow:0 0 6px 1.5px rgba(201,166,107,.8);':'box-shadow:0 0 3px rgba(255,246,232,.5);'}"></span>`;
+  }
+  el.innerHTML=html;
+});
+
+/* fake QR — 25×25, deterministic, with finder patterns */
+(function(){
+  const host=document.getElementById('qr'); if(!host) return;
+  const N=25, cell=6, rnd=mulberry32(1442);
+  let svg=`<svg width="${N*cell}" height="${N*cell}" style="display:block;background:#fff">`;
+  const inFinder=(r,c)=>(r<8&&c<8)||(r<8&&c>=N-8)||(r>=N-8&&c<8);
+  for(let r=0;r<N;r++)for(let c=0;c<N;c++){
+    if(inFinder(r,c))continue;
+    if(rnd()>0.52)svg+=`<rect x="${c*cell}" y="${r*cell}" width="${cell}" height="${cell}" fill="#0B0810"/>`;
+  }
+  const finder=(x,y)=>{
+    svg+=`<rect x="${x*cell}" y="${y*cell}" width="${7*cell}" height="${7*cell}" fill="#0B0810"/>`;
+    svg+=`<rect x="${(x+1)*cell}" y="${(y+1)*cell}" width="${5*cell}" height="${5*cell}" fill="#fff"/>`;
+    svg+=`<rect x="${(x+2)*cell}" y="${(y+2)*cell}" width="${3*cell}" height="${3*cell}" fill="#0B0810"/>`;
+  };
+  finder(0,0);finder(N-7,0);finder(0,N-7);
+  svg+='</svg>'; host.innerHTML=svg;
+})();
+
+/* passport ink stamps */
+document.querySelectorAll('.stamp').forEach((el,i)=>{
+  const c=el.dataset.c, ink=el.dataset.ink, flag=el.dataset.f;
+  const boxed=el.classList.contains('boxed');
+  const fresh=el.classList.contains('fresh');
+  const size=boxed?92:96;
+  const id='arc'+i;
+  let s=`<div style="position:relative;width:${size}px;height:${size}px;${fresh?'filter:drop-shadow(0 0 6px rgba(201,166,107,.65));':''}">`;
+  if(boxed){
+    s+=`<svg width="${size}" height="${size}" viewBox="0 0 100 100">
+      <rect x="6" y="22" width="88" height="56" rx="3" stroke="${ink}" stroke-width="2.4" fill="none" opacity=".85"/>
+      <rect x="10" y="26" width="80" height="48" rx="2" stroke="${ink}" stroke-width=".9" fill="none" opacity=".55"/>
+      <text x="50" y="36" fill="${ink}" font-size="9.5" font-weight="700" letter-spacing="1" text-anchor="middle" opacity=".9" font-family="Inter Tight">${c}</text>
+      <text x="50" y="70" fill="${ink}" font-size="5.5" letter-spacing="1.5" text-anchor="middle" opacity=".7" font-family="Inter Tight">AHWF · 2026</text>
+    </svg>`;
+    s+=`<span style="position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);font-size:19px">${flag}</span>`;
+  } else {
+    s+=`<svg width="${size}" height="${size}" viewBox="0 0 100 100">
+      <defs><path id="${id}" d="M 16,50 A 34,34 0 0 1 84,50"/></defs>
+      <circle cx="50" cy="50" r="46" stroke="${ink}" stroke-width="2.4" fill="none" opacity=".85"/>
+      <circle cx="50" cy="50" r="40" stroke="${ink}" stroke-width=".9" fill="none" opacity=".55"/>
+      <text fill="${ink}" font-size="10" font-weight="700" letter-spacing="1.5" opacity=".9" font-family="Inter Tight"><textPath href="#${id}" startOffset="50%" text-anchor="middle">${c}</textPath></text>
+      <text x="50" y="76" fill="${ink}" font-size="5.5" letter-spacing="1.5" text-anchor="middle" opacity=".7" font-family="Inter Tight">SUHOOR FEST</text>
+      <text x="50" y="86" fill="${ink}" font-size="7" text-anchor="middle" opacity=".7" font-family="Inter Tight">★ 2026 ★</text>
+    </svg>`;
+    s+=`<span style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-size:20px">${flag}</span>`;
+  }
+  s+='</div>'; el.innerHTML=s;
+});
+</script>
+</body>
+</html>
